@@ -29,7 +29,11 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*']
 
 CSRF_TRUSTED_ORIGINS = [ 'https://*' ]
 
-
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+    },
+}
 # Application definition
 
 INSTALLED_APPS = [
