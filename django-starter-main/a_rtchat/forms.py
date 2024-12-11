@@ -43,7 +43,7 @@ class ChatRoomEditForm(ModelForm):
 class NewGroupForm(ModelForm):
     class Meta:
         model = ChatGroup
-        fields = ['group_name']
+        fields = ['groupchat_name']
         widgets = {
             'group_name' : forms.TextInput(attrs={
                 'placeholder': 'Add name ...',
@@ -57,7 +57,7 @@ class NewGroupForm(ModelForm):
 class ChatRoomEditForm(ModelForm):
     class Meta:
         model = ChatGroup
-        fields = ['group_name']
+        fields = ['groupchat_name']
         widgets = {
             'group_name' : forms.TextInput(attrs={
                 'class': 'p-4 text-xl font-bold mb-4',

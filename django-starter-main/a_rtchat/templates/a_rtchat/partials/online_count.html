@@ -1,4 +1,4 @@
-<span id="online-count" hx-swap-oob="outerHTML" class="pr-1">{{online}}</span>
+<span id="online-count" hx-swap-oob="outerHTML" class="pr-1">{{online}} </span>
 
 <script>
     // Apply the animation class when the span is updated
@@ -26,3 +26,52 @@
         animation: fadeInScale 0.6s ease;
     }
 </style>
+<div class="chat-container relative">
+    {% if online %}
+    <div id="online-icon" class="absolute top-2 left-2 rounded-full bg-green-500 p-1.5"></div>
+    {% else %}
+    <div id="online-icon" class="absolute top-2 left-2 rounded-full bg-gray-500 p-1.5"></div>
+    {% endif %}
+
+    <div class="chat-content">
+        <!-- Your chat messages and content go here -->
+    </div>
+</div>
+
+<style>
+    .chat-container {
+        position: relative;
+        background-color: #2b2e3d;
+        border-radius: 8px;
+        padding: 16px;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        overflow: hidden;
+    }
+
+    #online-icon {
+        width: 10px;
+        height: 10px;
+    }
+
+    .chat-content {
+        margin-top: 20px; /* To ensure chat messages don't overlap with the online icon */
+    }
+</style>
+
+<ul id="groupchat-members" class="flex gap-4">
+                {% for member in chat_group.users_online.all %}
+                <li>
+                    <a href="{% url 'profile' member.username %}" class="flex flex-col text-gray-400 items-center justify-center w-20 gap-2">
+                        <div class="relative">
+
+
+                            <img src="{{ member.profile.avatar }}" class="w-14 h-14 rounded-full object-cover"/>
+                        </div>
+                            {{member.profile.name}}
+                    </a>
+
+                </li>
+                {% endfor %}
+            </ul>
