@@ -5,7 +5,7 @@ from django.urls import path, include
 from .views import *
 
 urlpatterns =[
-    path('',chat_view,name='chat'),
+    path('',chat_view,name='home'),
 
 ]
 if settings.DEBUG:
