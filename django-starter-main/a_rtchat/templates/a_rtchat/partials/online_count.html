@@ -1,0 +1,28 @@
+<span id="online-count" hx-swap-oob="outerHTML" class="pr-1">{{online}}</span>
+
+<script>
+    // Apply the animation class when the span is updated
+    const span = document.getElementById('online-count');
+    span.classList.add('fade-in-scale');
+
+    // Remove the animation class after it completes to allow reapplication
+    span.addEventListener('animationend', () => {
+        span.classList.remove('fade-in-scale');
+    });
+</script>
+
+<style>
+    @keyframes fadeInScale {
+        from {
+            opacity: 0;
+            transform: scale(4);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    .fade-in-scale {
+        animation: fadeInScale 0.6s ease;
+    }
+</style>
