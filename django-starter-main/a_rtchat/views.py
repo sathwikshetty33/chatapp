@@ -96,7 +96,7 @@ def chatroomdelete(request, chatroom_name):
           return redirect('home')
      return render(request,'a_rtchat/chatroom_delete.html',{'chatroom' : chatroom})
 def leavechatroom(request,chatroom_name):
-    chatroom = get_object_or_404(ChatGroup,chatroom_name=chatroom_name)
+    chatroom = get_object_or_404(ChatGroup,group_name=chatroom_name)
     if request.user not in chatroom.members.all():
         raise Http404()
     if request.method == "POST":

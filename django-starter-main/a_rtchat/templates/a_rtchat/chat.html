@@ -1,7 +1,7 @@
 {% extends 'layouts/blank.html' %}
 {% load static %}
 
-
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 {% block content %}
 <style>
     body {
@@ -176,11 +176,41 @@
             </div>
         </div>
     </div>
-    {% if chat_group.members.exists %}
-    <a href="{% url 'chatroom-leave' chat_group.group_name %}">
-        {% include 'a_rtchat/modal_chat_leave.html' %}
-    </a>
-    {% endif %}
+   {% if chatgroup.members %}
+<div class="d-flex justify-content-end p-3">
+    <!-- Leave Group Button -->
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#leaveGroupModal">
+        Leave Group
+    </button>
+</div>
+
+<!-- Confirmation Modal -->
+<div class="modal fade" id="leaveGroupModal" tabindex="-1" aria-labelledby="leaveGroupModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="leaveGroupModalLabel">Confirm Leave Group</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <p>Are you sure you want to leave this group? This action cannot be undone.</p>
+            </div>
+            <div class="modal-footer d-flex justify-content-between">
+                <!-- Cancel Button -->
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <!-- Leave Group Button -->
+                <form action="{% url 'leave-chatroom' chatgroup.group_name %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="group_id" value="{{ chatgroup.id }}">
+                    <button type="submit" class="btn btn-danger">Leave Group</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+
 </wrapper>
 <script>
     // Function to scroll the chat container to the bottom
@@ -205,5 +235,5 @@
         observer.observe(chatMessages, { childList: true });
     }
 </script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 {% endblock %}
